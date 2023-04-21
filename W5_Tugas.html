@@ -1,0 +1,115 @@
+<html>
+    <head>
+        <title>Exercise W05 Friday</title>
+        <script>
+            function fUpper() {
+                inputan = document.getElementById("txtInput").value;
+                hasil = inputan.toUpperCase()
+                document.getElementById("txtInput").value = hasil;
+            }
+
+            function fLower() {
+                inputan = document.getElementById("txtInput").value;
+                hasil = inputan.toLowerCase()
+                document.getElementById("txtInput").value = hasil;
+            }
+
+            function fFlip() {
+                inputan = document.getElementById("txtInput").value;
+                hasil = inputan.split('').reverse().join('');
+                document.getElementById("txtInput").value = hasil;
+            }
+
+            function fToggle() {
+                inputan = document.getElementById("txtInput").value;
+                const list = []
+                for (i=0;i<inputan.length;i++) {
+                    if (i%2==0)
+                    {
+                        hasil = inputan[i].toLowerCase()
+                    }
+                    else
+                    {
+                        hasil=inputan[i].toUpperCase()
+                    }
+                    list.push(hasil)
+                }
+                document.getElementById("txtInput").value = list.join('');
+            }
+            function fRotateKanan() {
+                inputan = document.getElementById("txtInput").value;
+                const list =[]
+                for(i=0;i<inputan.length;i++) {
+                    if (i==0) {
+                        hasil = inputan[inputan.length-1] ;
+                    }                   
+                    else {
+                        hasil=inputan[i-1];
+                    }
+                    list.push(hasil)
+                }
+                document.getElementById("txtInput").value = list.join('');
+            }
+
+            function fRotateKiri() {
+                inputan = document.getElementById("txtInput").value;
+                const list =[]
+                for(i=1;i<inputan.length;i++) {
+                    list.push(inputan[i])
+                }
+                list.push(inputan[0])
+                document.getElementById("txtInput").value = list.join('');
+            }
+
+            function fGenerateText() {
+                inputText =  document.getElementById("txtInputForGenerator").value;
+               
+                document.getElementById("labelContoh").innerText = inputText;
+           
+                // memproses smiley
+                inputText = inputText.replace(/:lol:/g, '<img src="lol.gif" alt="lol">');
+                inputText = inputText.replace(/:blush:/g, '<img src="blush.gif" alt="blush">');
+                inputText = inputText.replace(/:confused:/g, '<img src="confused.gif" alt="confused">');
+                inputText = inputText.replace(/:tongue:/g, '<img src="tongue.gif" alt="tongue">');
+                inputText = inputText.replace(/:smile:/g, '<img src="smile.gif" alt="smile">');
+
+                // memproses tag h1 - h6
+                inputText = inputText.replace(/\[1\](.*?)\[\/1\]/g, '<h1>$1</h1>');
+                inputText = inputText.replace(/\[2\](.*?)\[\/2\]/g, '<h2>$1</h2>');
+                inputText = inputText.replace(/\[3\](.*?)\[\/3\]/g, '<h3>$1</h3>');
+                inputText = inputText.replace(/\[4\](.*?)\[\/4\]/g, '<h4>$1</h4>');
+                inputText = inputText.replace(/\[5\](.*?)\[\/5\]/g, '<h5>$1</h5>');
+                inputText = inputText.replace(/\[6\](.*?)\[\/6\]/g, '<h6>$1</h6>');
+
+                // memproses tag bold
+                inputText = inputText.replace(/\[b\](.*?)\[\/b\]/g, '<b>$1</b>');
+
+                // memproses tag underline
+                inputText = inputText.replace(/\[u\](.*?)\[\/u\]/g, '<u>$1</u>');
+
+                // menampilkan hasil
+                document.getElementById("hasilAkhir").innerHTML = inputText;
+                
+            }
+        </script>
+    </head>
+
+    <body>
+        <h1>Text Editor</h1> 
+        <input type="text" id="txtInput" placeholder="Masukan teks disini!"> <br>
+        <button id="rotateLeft" onclick="fRotateKiri()">Rotate Left</button>
+        <button id="rotateKanan" onclick="fRotateKanan()">Rotate Kanan</button>
+        <button id="flip" onclick="fFlip()">Flip</button>
+        <button id="toggle" onclick="fToggle()">Toggle</button>
+        <button id="upper" onclick="fUpper()">Upper</button>
+        <button id="lower" onclick="fLower()">Lower</button>
+
+        <h1>Text Generator</h1>
+        <input type="text" id="txtInputForGenerator" placeholder="Masukan teks disini!"> <br>
+        <div style="display: inline;"><label style="font-style: italic;">Contoh: </label> </div>
+        <label id="labelContoh"></label> <br>
+        <button id="send" onclick="fGenerateText()">Send</button> <br>
+        <label>Hasil:</label> 
+        <div id="hasilAkhir"></div>
+    </body>
+</html>
